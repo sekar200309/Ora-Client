@@ -1,120 +1,18 @@
-// import React, { useState } from "react";
-// import { FiHeart } from "react-icons/fi";
-// import { FaHeart } from "react-icons/fa";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-
-// const LikeButton = ({ postId, initialLikes = [], reload }) => {
-//   const { user, token } = useAuth();
-//   const [likes, setLikes] = useState(initialLikes);
-//   const liked = likes.includes(user?._id);
-
-//   const toggleLike = async () => {
-//     try {
-//       const res = await axios.put(
-//         `http://localhost:5000/api/posts/${postId}/like`,
-//         {},
-//         {
-//           headers: { Authorization: `Bearer ${token}` },
-//         }
-//       );
-//       setLikes(res.data.likes); // update UI
-//       if (reload) reload(); // optional: trigger feed refresh
-//     } catch (error) {
-//       console.error("❌ Failed to like/unlike post:", error);
-//     }
-//   };
-
-//   return (
-//     <div
-//       onClick={toggleLike}
-//       className="flex items-center gap-1 text-gray-600 dark:text-gray-300 cursor-pointer hover:scale-105 transition-transform"
-//     >
-//       {liked ? (
-//         <FaHeart className="text-red-500" size={18} />
-//       ) : (
-//         <FiHeart size={18} />
-//       )}
-//       <span className="text-sm">{likes.length}</span>
-//     </div>
-//   );
-// };
-
-// export default LikeButton;
-
-
-
-// working
-
-// src/components/posts/LikeButton.jsx
-// import React, { useState } from "react";
-// import { FiHeart } from "react-icons/fi";
-// import { FaHeart } from "react-icons/fa";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-
-// const LikeButton = ({ postId, initialLikes = [] }) => {
-//   const { user, token } = useAuth();
-//   const [likes, setLikes] = useState(initialLikes);
-
-//   const userId = user?._id;
-//   const isLiked = likes.includes(userId);
-
-//   const toggleLike = async () => {
-//     try {
-//       const res = await axios.put(
-//         `http://localhost:5000/api/posts/${postId}/like`,
-//         {},
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       setLikes(res.data.likes); // Update state with new likes from server
-//     } catch (err) {
-//       console.error("❌ Like toggle failed:", err);
-//     }
-//   };
-
-//   return (
-//     <div
-//       onClick={toggleLike}
-//       className={`flex items-center gap-1 cursor-pointer  transition-transform ${
-//         isLiked ? "text-red-500" : "text-gray-400"
-//       }`}
-//     >
-//       {isLiked ? <FaHeart size={18} /> : <FiHeart size={18} />}
-//       <span>{likes.length}</span>
-//     </div>
-//   );
-// };
-
-// export default LikeButton;
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_BASE_URL;
 const LikeButton = ({ postId, liked, count, onLikeToggle }) => {
   const { token } = useAuth();
   const [isLiked, setIsLiked] = useState(liked);
   const [likeCount, setLikeCount] = useState(count);
-
+// const API = process.env.REACT_APP_API_BASE_URL;
   const handleToggle = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/posts/${postId}/like`,
+        // `http://localhost:5000/api/posts/${postId}/like`,
+        `${API}/api/posts/${postId}/like`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

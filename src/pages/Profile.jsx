@@ -2,23 +2,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+const API = import.meta.env.VITE_API_BASE_URL;
 
 const Profile = () => {
   const { token } = useAuth();
   const [profile, setProfile] = useState(null);
-
+// const API = process.env.REACT_APP_API_BASE_URL;
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
+        // const res = await axios.get("http://localhost:5000/api/users/profile", {
+        const res = await axios.get(`${API}/api/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setProfile(res.data);
-        console.log("✅ Profile:", res.data);
+        console.log("Profile:", res.data);
       } catch (err) {
-        console.error("❌ Error fetching profile:", err);
+        console.error("Error fetching profile:", err);
       }
     };
 

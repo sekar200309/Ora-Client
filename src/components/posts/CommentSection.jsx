@@ -1,105 +1,21 @@
-// // // src/components/posts/CommentSection.jsx
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-
-// const CommentSection = ({ postId, comments = [], onCommentAdded }) => {
-//   const { token } = useAuth();
-//   const [text, setText] = useState("");
-
-//   const handleAddComment = async () => {
-//     if (!text.trim()) return;
-//     try {
-//       const res = await axios.post(
-//         `http://localhost:5000/api/posts/${postId}/comment`,
-//         { text },
-//         { headers: { Authorization: `Bearer ${token}` } }
-//       );
-//       setText("");
-//       if (onCommentAdded) onCommentAdded(res.data);
-//     } catch (err) {
-//       console.error("❌ Error adding comment", err);
-//     }
-//   };
-
-//   return (
-//     <div className="mt-4 space-y-2">
-//       <h3 className="font-semibold text-gray-200">Comments</h3>
-
-//       {/* Input */}
-//       <div className="flex gap-2 mt-2">
-//         <input
-//           type="text"
-//           className="flex-1 p-2 rounded bg-gray-800 text-white"
-//           placeholder="Write a comment..."
-//           value={text}
-//           onChange={(e) => setText(e.target.value)}
-//         />
-//         <button
-//           onClick={handleAddComment}
-//           className="bg-blue-600 px-3 py-1 rounded text-white hover:bg-blue-700"
-//         >
-//           Post
-//         </button>
-//       </div>
-
-//       {/* Comments */}
-//       <div className="text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
-//         {comments.map((c, index) => (
-//           <div key={index}>
-//             <strong>{c.username || "User"}:</strong> {c.text}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CommentSection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // src/components/posts/CommentSection.jsx
 import React, { useState } from "react";
 import { FiMessageCircle, FiSend } from "react-icons/fi";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-
+const API = import.meta.env.VITE_API_BASE_URL;
 const CommentSection = ({ postId, comments = [], onCommentAdded }) => {
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
   const { token } = useAuth();
-
+// const API = process.env.REACT_APP_API_BASE_URL;
   const handleAddComment = async () => {
     if (!text.trim()) return;
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/posts/${postId}/comment`,
+        // `http://localhost:5000/api/posts/${postId}/comment`,
+        `${API}/api/posts/${postId}/comment`,
         { text },
         { headers: { Authorization: `Bearer ${token}` } }
       );

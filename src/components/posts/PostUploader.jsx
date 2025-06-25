@@ -1,99 +1,15 @@
-// // src/components/posts/PostUploader.jsx
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { useAuth } from "../../context/AuthContext";
-
-// const PostUploader = ({ onClose, onUpload }) => {
-//   const { token } = useAuth();
-//   const [image, setImage] = useState(null);
-//   const [caption, setCaption] = useState("");
-//   const [uploading, setUploading] = useState(false);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     if (!image || !caption) return alert("Image and caption are required!");
-
-//     const formData = new FormData();
-//     formData.append("image", image);
-//     formData.append("caption", caption);
-
-//     try {
-//       setUploading(true);
-//       const res = await axios.post("http://localhost:5000/api/posts", formData, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-
-//       console.log("✅ Upload success:", res.data);
-//       setImage(null);
-//       setCaption("");
-//       onUpload();  // Refresh feed
-//       onClose();   // Close modal
-//     } catch (err) {
-//       console.error("❌ Upload error:", err);
-//       alert("Upload failed!");
-//     } finally {
-//       setUploading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-//       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-//         <h2 className="text-xl font-semibold mb-4">Create Post</h2>
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           <input
-//             type="file"
-//             accept="image/*"
-//             onChange={(e) => setImage(e.target.files[0])}
-//             className="w-full border p-2 rounded"
-//           />
-//           <textarea
-//             placeholder="Write a caption..."
-//             value={caption}
-//             onChange={(e) => setCaption(e.target.value)}
-//             className="w-full border p-2 rounded"
-//             rows={3}
-//           />
-//           <div className="flex justify-end gap-3">
-//             <button
-//               type="button"
-//               onClick={onClose}
-//               className="px-4 py-2 rounded bg-gray-500 text-white"
-//             >
-//               Cancel
-//             </button>
-//             <button
-//               type="submit"
-//               disabled={uploading}
-//               className="px-4 py-2 rounded bg-blue-600 text-white"
-//             >
-//               {uploading ? "Uploading..." : "Upload"}
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PostUploader;
-
-
-
 // src/components/posts/PostUploader.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+const API = import.meta.env.VITE_API_BASE_URL;
 
 const PostUploader = ({ onClose, onUpload }) => {
   const { token } = useAuth();
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
-
+// const API = process.env.REACT_APP_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!image) return alert("Please select an image");
@@ -104,7 +20,8 @@ const PostUploader = ({ onClose, onUpload }) => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/posts", formData, {
+      // const res = await axios.post("http://localhost:5000/api/posts", formData, {
+      const res = await axios.post(`${API}/api/posts`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
