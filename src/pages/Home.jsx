@@ -12,26 +12,23 @@ const Home = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-black text-black dark:text-white">
-      
-      {/* Sidebar (fixed width on md and above) */}
-      <aside className="hidden md:block md:w-1/5 lg:w-64 border-r border-gray-200 dark:border-gray-700">
-        <Sidebar
-          onUploadClick={() => setShowModal(true)}
-          onProfileClick={() => setShowProfile(true)}
-        />
-      </aside>
+      {/* Sidebar (desktop) + Bottom Navbar (mobile) */}
+      <Sidebar
+        onUploadClick={() => setShowModal(true)}
+        onProfileClick={() => setShowProfile(true)}
+      />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-2xl mx-auto px-4 py-6 md:ml-[20%] lg:ml-64">
+      {/* Feed Content */}
+      <main className="flex-1 max-w-2xl mx-auto px-4 py-6 md:ml-[20%] lg:ml-64 pb-24">
         <Feed reload={reloadFeed} />
       </main>
 
-      {/* Upload Button (shown on large screens in sidebar area) */}
+      {/* Upload Button for Desktop (optional placement) */}
       <div className="hidden md:block md:w-1/5 lg:w-64 p-4">
         <UploadButton onClick={() => setShowModal(true)} />
       </div>
 
-      {/* Modal: Upload Post */}
+      {/* Post Upload Modal */}
       {showModal && (
         <PostUploader
           onClose={() => setShowModal(false)}
@@ -42,11 +39,12 @@ const Home = () => {
         />
       )}
 
-      {/* Modal: Profile */}
-      {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+      {/* Profile Modal */}
+      {showProfile && (
+        <ProfileModal onClose={() => setShowProfile(false)} />
+      )}
     </div>
   );
 };
 
 export default Home;
-
