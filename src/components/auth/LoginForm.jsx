@@ -36,7 +36,7 @@ const LoginForm = () => {
     onSubmit={handleLogin}
     className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md w-full max-w-sm mx-4"
   >
-    <h2 className="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-white">
+    <h2 className="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-white hover:cursor-pointer">
       Login
     </h2>
 
@@ -64,16 +64,16 @@ const LoginForm = () => {
 
     <button
       type="submit"
-      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
+      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition hover:cursor-pointer"
     >
       Login
     </button>
 
-    <p className="text-sm text-center mt-4 text-gray-600 dark:text-gray-400">
+    <p className="text-sm text-center mt-4 text-gray-600 dark:text-gray-400 hover:cursor-pointer">
       Don’t have an account?{" "}
       <Link
         to="/register"
-        className="text-blue-500 hover:underline dark:text-blue-400"
+        className="text-blue-500 hover:underline dark:text-blue-400 hover:cursor-pointer"
       >
         Register
       </Link>
