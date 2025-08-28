@@ -12,13 +12,13 @@ const LandingPage = () => {
         <div className="space-x-4">
           <button
             onClick={() => navigate("/login")}
-            className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-500"
+            className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-500 hover:cursor-pointer"
           >
             Login
           </button>
           <button
             onClick={() => navigate("/register")}
-            className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-500"
+            className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-500 hover:cursor-pointer"
           >
             Register
           </button>
@@ -34,7 +34,7 @@ const LandingPage = () => {
         </p>
         <button
           onClick={() => navigate("/register")}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow hover:cursor-pointer"
         >
           Get Started
         </button>
